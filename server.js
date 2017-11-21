@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-  res.send('hello!');
+  res.send('This server is to be used with the bookmark extension for Google Chrome.');
 });
 
 app.get('/getBookmarks', (req, res) => {
