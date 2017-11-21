@@ -13,10 +13,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/', (req, res) => {
-  res.send('This server is to be used with the bookmark extension for Google Chrome.');
-});
-
 app.get('/getBookmarks', (req, res) => {
   MongoClient.connect(url, function(err, database) {
     let db = database.collection("bookmarks");
