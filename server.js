@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 
-require('dotenv').config()
+const cors = require('cors');
+app.use(cors());
+
+require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
@@ -14,8 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/getBookmarks', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   MongoClient.connect(url, function(err, database) {
     let db = database.collection("bookmarks");
     db.find(ObjectId("5a12182af36d2815c109125d")).next(function(err, data) {
