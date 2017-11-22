@@ -133,6 +133,25 @@ app.delete('/removeBookmark', (req, res) => {
   });
 });
 
+app.delete('/removeFolder', (req, res) => {
+  MongoClient.connect(url, function(err, database) {
+    let db = database.collection("bookmarks");
+    let data = req.body;
+
+    db.products.update({
+      _id: ObjectId("5a12182af36d2815c109125d")
+    }, {
+      $unset: {
+        [data.folder]: ""
+      }
+    });
+
+    res.send("deleted");
+
+  });
+
+});
+
 app.listen(process.env.PORT, () => {
   console.log('app listening on port!');
 });
