@@ -138,7 +138,7 @@ app.delete('/removeFolder', (req, res) => {
     let db = database.collection("bookmarks");
     let data = req.body;
 
-    db.products.update({
+    db.update({
       _id: ObjectId("5a12182af36d2815c109125d")
     }, {
       $unset: {
