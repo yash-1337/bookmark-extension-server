@@ -17,16 +17,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/getBookmarks', (req, res) => {
-  MongoClient.connect(url, function(err, database) {
+  MongoClient.connect(url, function (err, database) {
     let db = database.collection("bookmarks");
-    db.find(ObjectId("5a12182af36d2815c109125d")).next(function(err, data) {
+    db.find(ObjectId("5a12182af36d2815c109125d")).next(function (err, data) {
       res.send(data);
     });
   });
 });
 
 app.post('/addBookmark', (req, res) => {
-  MongoClient.connect(url, function(err, database) {
+  MongoClient.connect(url, function (err, database) {
     let db = database.collection("bookmarks");
     let data = req.body;
 
@@ -52,7 +52,7 @@ app.post('/addBookmark', (req, res) => {
         [folder]: {
           $exists: true
         }
-      }).next(function(err, data) {
+      }).next(function (err, data) {
 
         let NumberofItemsinFolder = data[folder].length;
         let BookmarkinFolderData = {
@@ -70,7 +70,7 @@ app.post('/addBookmark', (req, res) => {
 
 app.post('/addFolder', (req, res) => {
   let data = req.body;
-  MongoClient.connect(url, function(err, database) {
+  MongoClient.connect(url, function (err, database) {
     let db = database.collection("bookmarks");
 
     let folder = data.folder;
@@ -79,7 +79,7 @@ app.post('/addFolder', (req, res) => {
       [folder]: {
         $exists: true
       }
-    }).next(function(err, data) {
+    }).next(function (err, data) {
       if (data) {
         res.send("already exists");
       } else if (!data) {
@@ -102,7 +102,7 @@ app.post('/addFolder', (req, res) => {
 });
 
 app.delete('/removeBookmark', (req, res) => {
-  MongoClient.connect(url, function(err, database) {
+  MongoClient.connect(url, function (err, database) {
     let db = database.collection("bookmarks");
     let data = req.body;
     let bookmark = {
@@ -134,7 +134,7 @@ app.delete('/removeBookmark', (req, res) => {
 });
 
 app.delete('/removeFolder', (req, res) => {
-  MongoClient.connect(url, function(err, database) {
+  MongoClient.connect(url, function (err, database) {
     let db = database.collection("bookmarks");
     let data = req.body;
 
